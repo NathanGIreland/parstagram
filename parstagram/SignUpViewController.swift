@@ -27,7 +27,7 @@ class SignUpViewController: UIViewController {
             let user = PFUser()
             user.username = usernameFieldsignup.text
             user.password = passwordFieldsignup.text
-    
+
             user.signUpInBackground{(success, error) in
                 if success {
                     self.inUselbl.isHidden = true

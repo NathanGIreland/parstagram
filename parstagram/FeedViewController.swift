@@ -12,6 +12,8 @@ import AlamofireImage
 import Alamofire
 
 class FeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    let currentUser = PFUser.current()
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -23,6 +25,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.dataSource = self
         self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 150
+     
         DataRequest.addAcceptableImageContentTypes(["application/octet-stream"])
 
         // Do any additional setup after loading the view.
@@ -31,6 +34,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         let query = PFQuery(className: "Post")
+        query.includeKey("author.profilePicture")
         query.includeKey("author")
         query.limit = 20
         query.findObjectsInBackground{(posts, error) in
@@ -39,6 +43,8 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                 self.tableView.reloadData()
             }
         }
+        
+              
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -53,14 +59,18 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         let user = post["author"] as! PFUser
         cell.nameField.text = user.username
         cell.commentField.text = post["caption"] as? String
+        let postImagefile = post["image"] as! PFFileObject
+        let profilUrlString = postImagefile.url!
+        let profileUrl = URL(string: profilUrlString)!
+        cell.ImageView.af_setImage(withURL: profileUrl)
         
-        let imagefile = post["image"] as! PFFileObject
-        let urlString = imagefile.url!
-        let url = URL(string: urlString)!
         
-        print(url)
-                
-        cell.ImageView.af_setImage(withURL: url)
+        if user["profilePicture"] != nil{
+            let imagefile = user["profilePicture"] as! PFFileObject
+            let urlString = imagefile.url!
+            let url = URL(string: urlString)!
+            cell.profileImageView.af_setImage(withURL: url)
+        }
         
         return cell
     }
