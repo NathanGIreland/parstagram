@@ -17,11 +17,16 @@ class ProfileViewController: UIViewController {
     
     
     @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var usernameLbl: UILabel!
     
     var profile = [PFObject]()
     override func viewDidLoad() {
         super.viewDidLoad()
         DataRequest.addAcceptableImageContentTypes(["application/octet-stream"])
+        
+        usernameLbl.text = currentUser!["username"] as? String
+        
+        usernameLbl.isHidden = false;
         
         
         
@@ -37,7 +42,9 @@ class ProfileViewController: UIViewController {
             let imagefile = currentUser!["profilePicture"] as! PFFileObject
             let urlString = imagefile.url!
             let url = URL(string: urlString)!
+            
             profileImageView.af_setImage(withURL: url)
+            
         }
         
         

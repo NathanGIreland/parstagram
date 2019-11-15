@@ -19,14 +19,20 @@ class SignUpViewController: UIViewController {
         super.viewDidLoad()
         inUselbl.text = "Username in use"
         inUselbl.textColor = UIColor.red
-
-        // Do any additional setup after loading the view.
+        
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+           view.addGestureRecognizer(tap)
+                   // Do any additional setup after loading the view.
     }
     
         @IBAction func onSignUp(_ sender: Any) {
             let user = PFUser()
             user.username = usernameFieldsignup.text
             user.password = passwordFieldsignup.text
+            
+            let imageData = UIImage(named: "image_placeholder")?.pngData()
+            let file = PFFileObject(data: imageData!)
+            user.setObject(file!, forKey: "profilePicture")
 
             user.signUpInBackground{(success, error) in
                 if success {
@@ -40,6 +46,12 @@ class SignUpViewController: UIViewController {
             }
     
         }
+
+       
+       @objc func dismissKeyboard() {
+           //Causes the view (or one of its embedded text fields) to resign the first responder status.
+           view.endEditing(true)
+       }
     
 
     /*
