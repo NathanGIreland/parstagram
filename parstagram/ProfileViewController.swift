@@ -48,11 +48,17 @@ class ProfileViewController: UIViewController {
         }
         
         
-        
-        
         }
          
-
+    @IBAction func onLogoutBtn(_ sender: Any) {
+        PFUser.logOut()
+        
+        let main = UIStoryboard(name: "Main", bundle: nil)
+        let loginViewController = main.instantiateViewController(withIdentifier: "loginViewController")
+        let delegate = self.view.window?.windowScene?.delegate as! SceneDelegate
+        delegate.window?.rootViewController = loginViewController
+    }
+    
 
         
 

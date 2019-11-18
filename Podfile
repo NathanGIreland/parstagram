@@ -9,6 +9,7 @@ target 'parstagram' do
   pod "Parse"
   pod "AlamofireImage"
   pod 'ReverseExtension', '~> 0.5'
+  pod 'MessageKit'
 
   target 'parstagramTests' do
     inherit! :search_paths
