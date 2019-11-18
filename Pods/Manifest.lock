@@ -7,10 +7,12 @@ PODS:
     - Parse/Core (= 1.17.3)
   - Parse/Core (1.17.3):
     - Bolts/Tasks (~> 1.9)
+  - ReverseExtension (0.5.0)
 
 DEPENDENCIES:
   - AlamofireImage
   - Parse
+  - ReverseExtension (~> 0.5)
 
 SPEC REPOS:
   trunk:
@@ -18,13 +20,15 @@ SPEC REPOS:
     - AlamofireImage
     - Bolts
     - Parse
+    - ReverseExtension
 
 SPEC CHECKSUMS:
   Alamofire: afc3e7c6db61476cb45cdd23fed06bad03bbc321
   AlamofireImage: 63cfe3baf1370be6c498149687cf6db3e3b00999
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
   Parse: c1ad2a04d2cab2b54b6fb7da05f741abf2cf57d1
+  ReverseExtension: 21c8dd4e767f93b56fb97d873686d24160f83945
 
-PODFILE CHECKSUM: 7a9c6e7455ea702f035a949ee6f208ab8750bc23
+PODFILE CHECKSUM: 1cc94166a154519a21b8bdec6e88f6966c2a31cd
 
 COCOAPODS: 1.8.4

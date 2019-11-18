@@ -14,6 +14,9 @@ import Alamofire
 class FeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     let currentUser = PFUser.current()
+    var numberOfPost: Int!
+    
+    let myrefreshControl = UIRefreshControl()
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -25,6 +28,9 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.dataSource = self
         self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 150
+        
+        myrefreshControl.addTarget(self, action: #selector(onRefresh), for: .valueChanged)
+        tableView.refreshControl = myrefreshControl
      
         DataRequest.addAcceptableImageContentTypes(["application/octet-stream"])
 
@@ -33,18 +39,42 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        refreshPost()
+        
+              
+    }
+    
+    func refreshPost(){
+         let query = PFQuery(className: "Post")
+               query.includeKey("author.profilePicture")
+               query.includeKey("author")
+        query.order(byDescending: "createdAt")
+               numberOfPost = 10
+               query.limit = numberOfPost
+               query.findObjectsInBackground{(posts, error) in
+                   if posts != nil{
+                       self.posts = posts!
+                       self.tableView.reloadData()
+                       self.myrefreshControl.endRefreshing()
+                   }
+               }
+    }
+    
+    func morePost(){
         let query = PFQuery(className: "Post")
         query.includeKey("author.profilePicture")
         query.includeKey("author")
-        query.limit = 20
+        query.order(byDescending: "createdAt")
+        numberOfPost = numberOfPost + 20
+        query.limit = numberOfPost
         query.findObjectsInBackground{(posts, error) in
             if posts != nil{
                 self.posts = posts!
                 self.tableView.reloadData()
+                self.myrefreshControl.endRefreshing()
             }
         }
         
-              
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -74,6 +104,18 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row + 1 == posts.count{
+            morePost()
+        }
+    }
+    
+    @objc func onRefresh() {
+        refreshPost()
+    }
+    
+ 
 
     /*
     // MARK: - Navigation
