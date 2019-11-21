@@ -14,6 +14,11 @@ class CameraViewController:  UIViewController, UIImagePickerControllerDelegate, 
 
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var commentField: UITextField!
+    @IBOutlet weak var locationBtn: UIButton!
+    
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
@@ -31,6 +36,7 @@ class CameraViewController:  UIViewController, UIImagePickerControllerDelegate, 
         let file = PFFileObject(data: imageData!)
         
         post["image"] = file
+        post["location"] =
         
         post.saveInBackground{(success, error) in
             if success{
@@ -63,13 +69,15 @@ class CameraViewController:  UIViewController, UIImagePickerControllerDelegate, 
     
         print("hello from on picker btn")
         let image = info[.editedImage] as! UIImage
-        let size = CGSize(width: 326, height: 326)
+        let size = CGSize(width: 375, height: 375)
         let scaledImage = image.af_imageScaled(to: size)
         
         imageView.image = scaledImage
         
         dismiss(animated: true, completion: nil)
     }
+    
+  
     
     @objc func dismissKeyboard() {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.

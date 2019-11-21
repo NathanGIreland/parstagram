@@ -3,7 +3,11 @@ PODS:
   - AlamofireImage (3.5.2):
     - Alamofire (~> 4.8)
   - Bolts/Tasks (1.9.0)
+  - DZNEmptyDataSet (1.8.1)
   - InputBarAccessoryView (4.2.2)
+  - MessageInputBar (0.4.1):
+    - MessageInputBar/Core (= 0.4.1)
+  - MessageInputBar/Core (0.4.1)
   - MessageKit (3.0.0):
     - InputBarAccessoryView (~> 4.2.2)
   - Parse (1.17.3):
@@ -11,32 +15,42 @@ PODS:
   - Parse/Core (1.17.3):
     - Bolts/Tasks (~> 1.9)
   - ReverseExtension (0.5.0)
+  - ViewAnimator (2.7.0)
 
 DEPENDENCIES:
   - AlamofireImage
+  - DZNEmptyDataSet
+  - MessageInputBar
   - MessageKit
   - Parse
   - ReverseExtension (~> 0.5)
+  - ViewAnimator
 
 SPEC REPOS:
   trunk:
     - Alamofire
     - AlamofireImage
     - Bolts
+    - DZNEmptyDataSet
     - InputBarAccessoryView
+    - MessageInputBar
     - MessageKit
     - Parse
     - ReverseExtension
+    - ViewAnimator
 
 SPEC CHECKSUMS:
   Alamofire: afc3e7c6db61476cb45cdd23fed06bad03bbc321
   AlamofireImage: 63cfe3baf1370be6c498149687cf6db3e3b00999
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
+  DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   InputBarAccessoryView: 2b937602598e2fab3149f37f51dd7ad795653812
+  MessageInputBar: e81c7535347f1f7b923de7080409a535a004b6e4
   MessageKit: e892a9ca49ebe6d82684d3a93ad84021fa23e2c6
   Parse: c1ad2a04d2cab2b54b6fb7da05f741abf2cf57d1
   ReverseExtension: 21c8dd4e767f93b56fb97d873686d24160f83945
+  ViewAnimator: 5af1c6f3b310f012bf081259c43717aa54fbae73
 
-PODFILE CHECKSUM: e7453fa4b98dab3fa703aef06059c09d6970310f
+PODFILE CHECKSUM: 568020155c1e2a6fbf773bebaed4fb3974eedbf3
 
 COCOAPODS: 1.8.4
