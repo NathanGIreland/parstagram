@@ -71,5 +71,9 @@
 	<string>$(PRODUCT_NAME) uses Photo Library</string>
 	<key>NSCameraUsageDescription</key>
 	<string>$(PRODUCT_NAME) uses camera</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>accept to get location</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>accept to get location</string>
 </dict>
 </plist>

@@ -13,6 +13,7 @@ target 'parstagram' do
   pod 'MessageInputBar'
   pod 'DZNEmptyDataSet'
   pod "ViewAnimator"
+  pod "AFNetworking"
 
   target 'parstagramTests' do
     inherit! :search_paths
